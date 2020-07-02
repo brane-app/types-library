@@ -1,6 +1,7 @@
 package monketype
 
 import (
+	"github.com/google/uuid"
 	"github.com/mitchellh/mapstructure"
 
 	"encoding/json"
@@ -39,7 +40,32 @@ func (_ Content) FromMap(data map[string]interface{}) (it MonkeType, err error) 
 	return
 }
 
+func (content Content) Map() (data map[string]interface{}, err error) {
+	var bytes []byte
+	if bytes, err = json.Marshal(content); err == nil {
+		err = json.Unmarshal(bytes, &data)
+	}
+
+	return
+}
+
 func (content Content) JSON() (data []byte, err error) {
 	data, err = json.Marshal(content)
+	return
+}
+
+func NewContent(file_url, author, mime string, tags []string, featurable, nsfw bool) (created Content) {
+	created = Content{
+		FileURL:    file_url,
+		Author:     author,
+		Mime:       mime,
+		Tags:       tags,
+		Featurable: featurable,
+		NSFW:       nsfw,
+
+		Created: time.Now().Unix(),
+		ID:      uuid.New().String(),
+	}
+
 	return
 }

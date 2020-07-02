@@ -1,9 +1,11 @@
 package monketype
 
 import (
+	"github.com/google/uuid"
 	"github.com/mitchellh/mapstructure"
 
 	"encoding/json"
+	"time"
 )
 
 type User struct {
@@ -32,7 +34,29 @@ func (_ User) FromMap(data map[string]interface{}) (it MonkeType, err error) {
 	return
 }
 
+func (user User) Map() (data map[string]interface{}, err error) {
+	var bytes []byte
+	if bytes, err = json.Marshal(user); err == nil {
+		err = json.Unmarshal(bytes, &data)
+	}
+
+	return
+}
+
 func (user User) JSON() (data []byte, err error) {
 	data, err = json.Marshal(user)
+	return
+}
+
+func NewUser(nick, bio, email string) (made User) {
+	made = User{
+		Nick:  nick,
+		Email: email,
+		Bio:   bio,
+
+		ID:      uuid.New().String(),
+		Created: time.Now().Unix(),
+	}
+
 	return
 }
