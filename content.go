@@ -5,6 +5,7 @@ import (
 	"github.com/mitchellh/mapstructure"
 
 	"encoding/json"
+	"time"
 )
 
 type Content struct {
@@ -42,10 +43,8 @@ func (_ Content) FromMap(data map[string]interface{}) (it MonkeType, err error) 
 
 func (content Content) Map() (data map[string]interface{}, err error) {
 	var bytes []byte
-	if bytes, err = json.Marshal(content); err == nil {
-		err = json.Unmarshal(bytes, &data)
-	}
-
+	bytes, _ = json.Marshal(content)
+	json.Unmarshal(bytes, &data)
 	return
 }
 

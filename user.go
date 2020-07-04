@@ -34,12 +34,10 @@ func (_ User) FromMap(data map[string]interface{}) (it MonkeType, err error) {
 	return
 }
 
-func (user User) Map() (data map[string]interface{}, err error) {
+func (user User) Map() (data map[string]interface{}) {
 	var bytes []byte
-	if bytes, err = json.Marshal(user); err == nil {
-		err = json.Unmarshal(bytes, &data)
-	}
-
+	bytes, _ = json.Marshal(user)
+	json.Unmarshal(bytes, &data)
 	return
 }
 
