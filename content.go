@@ -41,7 +41,7 @@ func (_ Content) FromMap(data map[string]interface{}) (it MonkeType, err error) 
 	return
 }
 
-func (content Content) Map() (data map[string]interface{}, err error) {
+func (content Content) Map() (data map[string]interface{}) {
 	var bytes []byte
 	bytes, _ = json.Marshal(content)
 	json.Unmarshal(bytes, &data)
