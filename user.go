@@ -19,7 +19,7 @@ type User struct {
 	Created           int64  `json:"created"               db:"created"`
 }
 
-func (_ User) FromMap(data map[string]interface{}) (it MonkeType, err error) {
+func (it *User) FromMap(data map[string]interface{}) (err error) {
 	var config mapstructure.DecoderConfig = mapstructure.DecoderConfig{
 		Metadata: nil,
 		TagName:  "json",
@@ -54,6 +54,21 @@ func NewUser(nick, bio, email string) (made User) {
 
 		ID:      uuid.New().String(),
 		Created: time.Now().Unix(),
+	}
+
+	return
+}
+
+func UserFromMap(data map[string]interface{}) (it User, err error) {
+	var config mapstructure.DecoderConfig = mapstructure.DecoderConfig{
+		Metadata: nil,
+		TagName:  "json",
+		Result:   &it,
+	}
+
+	var decoder *mapstructure.Decoder
+	if decoder, err = mapstructure.NewDecoder(&config); err == nil {
+		err = decoder.Decode(data)
 	}
 
 	return

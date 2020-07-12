@@ -26,7 +26,7 @@ type Content struct {
 	NSFW         bool     `json:"nsfw"             db:"nsfw"`
 }
 
-func (_ Content) FromMap(data map[string]interface{}) (it MonkeType, err error) {
+func (it *Content) FromMap(data map[string]interface{}) (err error) {
 	var config mapstructure.DecoderConfig = mapstructure.DecoderConfig{
 		Metadata: nil,
 		TagName:  "json",
@@ -78,6 +78,21 @@ func NewContent(file_url, author, mime string, tags []string, featurable, nsfw b
 
 		Created: time.Now().Unix(),
 		ID:      uuid.New().String(),
+	}
+
+	return
+}
+
+func ContentFromMap(data map[string]interface{}) (it Content, err error) {
+	var config mapstructure.DecoderConfig = mapstructure.DecoderConfig{
+		Metadata: nil,
+		TagName:  "json",
+		Result:   &it,
+	}
+
+	var decoder *mapstructure.Decoder
+	if decoder, err = mapstructure.NewDecoder(&config); err == nil {
+		err = decoder.Decode(data)
 	}
 
 	return
