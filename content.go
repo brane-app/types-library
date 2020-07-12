@@ -46,19 +46,7 @@ func (content Content) Map() (data map[string]interface{}) {
 	bytes, _ = json.Marshal(content)
 	json.Unmarshal(bytes, &data)
 
-	var faces []interface{} = data["tags"].([]interface{})
-	if len(faces) == 0 {
-		return
-	}
-
-	var tags []string = make([]string, len(faces))
-	var index int
-	var tag interface{}
-	for index, tag = range faces {
-		tags[index] = tag.(string)
-	}
-
-	data["tags"] = tags
+	data["tags"] = content.Tags
 	return
 }
 
