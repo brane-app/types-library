@@ -8,6 +8,13 @@ import (
 	"time"
 )
 
+var (
+	privateFields []string = []string{
+		"email",
+		"created",
+	}
+)
+
 type User struct {
 	ID                string `json:"id"                    db:"id"`
 	Email             string `json:"email"                 db:"email"`
@@ -38,6 +45,17 @@ func (user User) Map() (data map[string]interface{}) {
 	var bytes []byte
 	bytes, _ = json.Marshal(user)
 	json.Unmarshal(bytes, &data)
+	return
+}
+
+func (user User) PublicMap() (data map[string]interface{}) {
+	data = user.Map()
+
+	var field string
+	for _, field = range privateFields {
+		delete(data, field)
+	}
+
 	return
 }
 
