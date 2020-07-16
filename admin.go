@@ -24,6 +24,8 @@ func (ban Ban) Map() (data map[string]interface{}) {
 		"banner":  ban.Banner,
 		"reason":  ban.Reason,
 		"expires": ban.Expires,
+		"created": ban.Created,
+		"forever": ban.Forever,
 	}
 
 	return
