@@ -56,6 +56,10 @@ func (content Content) JSON() (data []byte, err error) {
 }
 
 func NewContent(file_url, author, mime string, tags []string, featurable, nsfw bool) (created Content) {
+	if tags == nil {
+		tags = make([]string, 0)
+	}
+
 	created = Content{
 		FileURL:    file_url,
 		Author:     author,
