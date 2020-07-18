@@ -16,14 +16,16 @@ var (
 )
 
 type User struct {
-	ID                string `json:"id"                    db:"id"`
-	Email             string `json:"email"                 db:"email"`
-	Nick              string `json:"nick"                  db:"nick"`
-	Bio               string `json:"bio"                   db:"bio"`
-	SubscriberCount   int    `json:"subscriber_count"      db:"subscriber_count"`
-	SubscriptionCount int    `json:"subscription_count"    db:"subscription_count"`
-	PostCount         int    `json:"post_count"            db:"post_count"`
-	Created           int64  `json:"created"               db:"created"`
+	ID                string `json:"id" db:"id"`
+	Email             string `json:"email" db:"email"`
+	Nick              string `json:"nick" db:"nick"`
+	Bio               string `json:"bio" db:"bio"`
+	SubscriberCount   int    `json:"subscriber_count" db:"subscriber_count"`
+	SubscriptionCount int    `json:"subscription_count" db:"subscription_count"`
+	PostCount         int    `json:"post_count" db:"post_count"`
+	Created           int64  `json:"created" db:"created"`
+	Moderator         bool   `json:"moderator" db:"moderator"`
+	Admin             bool   `json:"admin" db:"admin"`
 }
 
 func (it *User) FromMap(data map[string]interface{}) (err error) {
