@@ -59,6 +59,7 @@ type Report struct {
 	Reported string `json:"reported" db:"reported"`
 	Reason   string `json:"reason" db:"reason"`
 	Created  int64  `json:"created" db:"created"`
+	Resolved bool   `json:"resolved" db:"resolved"`
 }
 
 func (report Report) Map() (data map[string]interface{}) {
@@ -67,6 +68,8 @@ func (report Report) Map() (data map[string]interface{}) {
 		"reporter": report.Reporter,
 		"reported": report.Reported,
 		"reason":   report.Reason,
+		"created":  report.Created,
+		"resolved": report.Resolved,
 	}
 
 	return
