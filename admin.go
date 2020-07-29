@@ -54,22 +54,26 @@ func NewBan(banner, banned, reason string, duration int64, forever bool) (ban Ba
 }
 
 type Report struct {
-	ID       string `json:"id" db:"id"`
-	Reporter string `json:"reporter" db:"reporter"`
-	Reported string `json:"reported" db:"reported"`
-	Reason   string `json:"reason" db:"reason"`
-	Created  int64  `json:"created" db:"created"`
-	Resolved bool   `json:"resolved" db:"resolved"`
+	ID         string `json:"id" db:"id"`
+	Reporter   string `json:"reporter" db:"reporter"`
+	Reported   string `json:"reported" db:"reported"`
+	Type       string `json:"type" db:"type"`
+	Reason     string `json:"reason" db:"reason"`
+	Created    int64  `json:"created" db:"created"`
+	Resolved   bool   `json:"resolved" db:"resolved"`
+	Resolution string `json:"resolution" db:"resolution"`
 }
 
 func (report Report) Map() (data map[string]interface{}) {
 	data = map[string]interface{}{
-		"id":       report.ID,
-		"reporter": report.Reporter,
-		"reported": report.Reported,
-		"reason":   report.Reason,
-		"created":  report.Created,
-		"resolved": report.Resolved,
+		"id":         report.ID,
+		"reporter":   report.Reporter,
+		"reported":   report.Reported,
+		"type":       report.Type,
+		"reason":     report.Reason,
+		"created":    report.Created,
+		"resolved":   report.Resolved,
+		"resolution": report.Resolution,
 	}
 
 	return
