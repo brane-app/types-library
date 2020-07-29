@@ -84,10 +84,11 @@ func (report Report) JSON() (data []byte, err error) {
 	return
 }
 
-func NewReport(reporter, reported, reason string) (report Report) {
+func NewReport(reporter, reported, report_type, reason string) (report Report) {
 	report = Report{
 		Reporter: reporter,
 		Reported: reported,
+		Type:     report_type,
 		Reason:   reason,
 
 		ID:      uuid.New().String(),
