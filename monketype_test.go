@@ -6,6 +6,15 @@ import (
 	"testing"
 )
 
+func acceptMonkeType(it MonkeType) {
+	return
+}
+
+func Test_MonkeType(test *testing.T) {
+	acceptMonkeType(Content{})
+	acceptMonkeType(User{})
+}
+
 func Test_Ban(test *testing.T) {
 	var banner string = uuid.New().String()
 	var banned string = uuid.New().String()
@@ -31,7 +40,7 @@ func Test_Report(test *testing.T) {
 	var reporter string = uuid.New().String()
 	var reported string = uuid.New().String()
 	var reason string = "they smell like cheese"
-	var report Report = NewReport(reporter, reported, reason)
+	var report Report = NewReport(reporter, reported, "user", reason)
 
 	if report.Reporter != reporter {
 		test.Errorf("report properties not being set for reporter! have: %s, want: %s", report.Reporter, reporter)
