@@ -2,6 +2,7 @@ package monketype
 
 import (
 	"github.com/google/uuid"
+	"github.com/mitchellh/mapstructure"
 
 	"encoding/json"
 	"time"
@@ -33,6 +34,21 @@ func (ban Ban) Map() (data map[string]interface{}) {
 
 func (ban Ban) JSON() (data []byte, err error) {
 	data, err = json.Marshal(ban)
+	return
+}
+
+func (it *Ban) FromMap(data map[string]interface{}) (err error) {
+	var config mapstructure.DecoderConfig = mapstructure.DecoderConfig{
+		Metadata: nil,
+		TagName:  "json",
+		Result:   &it,
+	}
+
+	var decoder *mapstructure.Decoder
+	if decoder, err = mapstructure.NewDecoder(&config); err == nil {
+		err = decoder.Decode(data)
+	}
+
 	return
 }
 
@@ -81,6 +97,21 @@ func (report Report) Map() (data map[string]interface{}) {
 
 func (report Report) JSON() (data []byte, err error) {
 	data, err = json.Marshal(report)
+	return
+}
+
+func (it *Report) FromMap(data map[string]interface{}) (err error) {
+	var config mapstructure.DecoderConfig = mapstructure.DecoderConfig{
+		Metadata: nil,
+		TagName:  "json",
+		Result:   &it,
+	}
+
+	var decoder *mapstructure.Decoder
+	if decoder, err = mapstructure.NewDecoder(&config); err == nil {
+		err = decoder.Decode(data)
+	}
+
 	return
 }
 
