@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	privateFields []string = []string{
+	userPrivateFields []string = []string{
 		"email",
 		"created",
 	}
@@ -54,7 +54,7 @@ func (user User) PublicMap() (data map[string]interface{}) {
 	data = user.Map()
 
 	var field string
-	for _, field = range privateFields {
+	for _, field = range userPrivateFields {
 		delete(data, field)
 	}
 

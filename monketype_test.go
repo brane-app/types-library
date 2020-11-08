@@ -75,7 +75,7 @@ func Test_User(test *testing.T) {
 
 	var public map[string]interface{} = user.PublicMap()
 	var key string
-	for _, key = range privateFields {
+	for _, key = range userPrivateFields {
 		if public[key] != nil {
 			test.Errorf("private map has key %s\n%#v", key, public)
 		}
@@ -85,7 +85,7 @@ func Test_User(test *testing.T) {
 	map_source.FromMap(user.Map())
 
 	if map_source.Nick != nick {
-		test.Errorf("nick %s not osurced from map %#v", nick, user.Map())
+		test.Errorf("nick %s not sourced from map %#v", nick, user.Map())
 	}
 }
 
