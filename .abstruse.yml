@@ -1,0 +1,5 @@
+image: golang
+branches:
+    - .*
+script:
+    - go test ./... -cover -count 1

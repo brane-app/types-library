@@ -1,4 +1,4 @@
-module github.com/imonke/monketype
+module git.gastrodon.io/imonke/monketype
 
 go 1.13
 
