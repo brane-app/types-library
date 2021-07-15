@@ -1,4 +1,4 @@
-module git.gastrodon.io/imonke/monketype
+module github.com/brane-app/types-library
 
 go 1.13
 
